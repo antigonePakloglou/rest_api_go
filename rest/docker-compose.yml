@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:13
+    restart: always
+    ports:
+      - "5435:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: pgdb
+    networks:
+      - basenetwork
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    ports:
+      - "5001:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: root@root.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    # ATTENTION : host.docker.internal
+    networks:
+      - basenetwork
+
+networks:
+  basenetwork:
